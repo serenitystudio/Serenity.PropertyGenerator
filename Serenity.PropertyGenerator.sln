@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serenity.PropertyGenerator", "Serenity.PropertyGenerator\Serenity.PropertyGenerator.csproj", "{A448206F-447D-4A19-B09E-463BBE3B4F49}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{FF44C7ED-61A7-4B24-8765-B7A5EF785910}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{6922B56E-EA7D-472A-AB48-568CE8DBD4AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp", "ConsoleApp\ConsoleApp.csproj", "{3FECA732-093D-424D-8218-41D2E94516DA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A448206F-447D-4A19-B09E-463BBE3B4F49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A448206F-447D-4A19-B09E-463BBE3B4F49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A448206F-447D-4A19-B09E-463BBE3B4F49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A448206F-447D-4A19-B09E-463BBE3B4F49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FECA732-093D-424D-8218-41D2E94516DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FECA732-093D-424D-8218-41D2E94516DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FECA732-093D-424D-8218-41D2E94516DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FECA732-093D-424D-8218-41D2E94516DA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A448206F-447D-4A19-B09E-463BBE3B4F49} = {FF44C7ED-61A7-4B24-8765-B7A5EF785910}
+		{3FECA732-093D-424D-8218-41D2E94516DA} = {6922B56E-EA7D-472A-AB48-568CE8DBD4AF}
+	EndGlobalSection
+EndGlobal
