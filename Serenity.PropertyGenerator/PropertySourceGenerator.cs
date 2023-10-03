@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Diagnostics;
+using System.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 
@@ -72,14 +73,14 @@ namespace {NameSpace}
 
             var sourceText = WriteProperty(codeWriter, semanticModel,
                 symbol.ContainingNamespace.IsGlobalNamespace ? string.Empty : symbol.ContainingNamespace.ToString(),
-                symbol.Name, workItems);
+                workItem.TypeName, workItems);
             context.AddSource($"{symbol.Name}.g.cs", SourceText.From(sourceText, Encoding.UTF8));
             codeWriter.Clear();
         }
     }
 
     private static string WriteProperty(in CodeWriter codeWriter, in SemanticModel? semanticModel, string namespaceName,
-        string className, List<WorkItem> workItems)
+        string typeName, List<WorkItem> workItems)
     {
         if (!string.IsNullOrEmpty(namespaceName))
         {
@@ -87,7 +88,7 @@ namespace {NameSpace}
             codeWriter.BeginBlock();
         }
 
-        codeWriter.AppendLine($"public partial class {className}");
+        codeWriter.AppendLine(typeName);
         codeWriter.BeginBlock();
 
         foreach (var workItem in workItems)
