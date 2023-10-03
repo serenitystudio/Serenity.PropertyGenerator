@@ -3,7 +3,7 @@ using Serenity.Property;
 
 namespace ConsoleApp;
 
-public partial class Test
+public partial class Foo
 {
     [Getter] private int _getterIntField;
 
@@ -11,9 +11,9 @@ public partial class Test
 
     [Getter, Setter] private int _getterSetterIntField;
 
-    [Getter] private TestFieldType[] _getterTestField;
+    [Getter] private FooFieldType[] _getterTestField;
 
-    [Setter] private TestFieldType _setterTestField;
+    [Setter] private FooFieldType _setterFooField;
 
-    [Getter, Setter] private TestFieldType _getterSetterTestField;
+    [Getter, Setter] private FooFieldType _getterSetterFooField;
 }
