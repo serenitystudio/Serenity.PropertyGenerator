@@ -7,16 +7,16 @@ public sealed class WorkItem
     public readonly FieldDeclarationSyntax FieldDeclarationSyntax;
     public bool ExistGetterProperty { get; private set; }
     public bool ExistSetterProperty { get; private set; }
-    public string? ClassName { get; private set; }
+    public string? TypeName { get; private set; }
 
     public WorkItem(FieldDeclarationSyntax fieldDeclarationSyntax)
     {
         FieldDeclarationSyntax = fieldDeclarationSyntax;
     }
 
-    public void SetClassName(string className)
+    public void SetTypeName(string typeName)
     {
-        ClassName = className;
+        TypeName = typeName;
     }
 
     public void SetExistGetterProperty(bool existGetterProperty)

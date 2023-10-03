@@ -11,13 +11,13 @@ public sealed class SyntaxReceiver : ISyntaxReceiver
     {
         if (TryGetWorkItem(syntaxNode, out var workItem))
         {
-            if (WorkItems.ContainsKey(workItem.ClassName))
+            if (WorkItems.ContainsKey(workItem.TypeName))
             {
-                WorkItems[workItem.ClassName].Add(workItem);
+                WorkItems[workItem.TypeName].Add(workItem);
             }
             else
             {
-                WorkItems.Add(workItem.ClassName, new List<WorkItem> { workItem });
+                WorkItems.Add(workItem.TypeName, new List<WorkItem> { workItem });
             }
         }
     }
@@ -50,9 +50,9 @@ public sealed class SyntaxReceiver : ISyntaxReceiver
 
             if (item.ExistProperty())
             {
-                var className = item.FieldDeclarationSyntax.SyntaxTree.GetRoot().DescendantNodes()
+                var typeName = item.FieldDeclarationSyntax.SyntaxTree.GetRoot().DescendantNodes()
                     .OfType<ClassDeclarationSyntax>().Last().Identifier.Text;
-                item.SetClassName(className);
+                item.SetTypeName(typeName);
                 workItem = item;
                 return true;
             }
