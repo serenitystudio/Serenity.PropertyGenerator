@@ -25,7 +25,7 @@ Minimum supported Unity version is Unity `2021.2` because of `netstandard2.1` su
 For more information on Unity and Source Generator, please refer to the [Unity Documentation](https://docs.unity3d.com/Manual/roslyn-analyzers.html).
 
 ## Quick Start
-To use the generator, add the `[Getter]` or `[Setter]` or `[Getter, Setter]` attribute to a field in partial class or struct. The attribute is also auto generated. It will generate a partial class under same namespace.
+To use the generator, add the `[Getter]` or `[Setter]` or `[Getter, Setter]` attribute to a field in partial class, struct or record. The attributes are also auto generated. It will generate a partial type under same namespace.
 
 ```csharp
 using System;
