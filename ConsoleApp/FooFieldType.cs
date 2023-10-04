@@ -1,5 +1,5 @@
 ﻿namespace DifferentNamespace;
 
-public class TestFieldType
+public class FooFieldType
 {
 }

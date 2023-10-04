@@ -1,4 +1,5 @@
-﻿using Microsoft.CodeAnalysis;
+﻿using System.Text;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Serenity.PropertyGenerator;
@@ -11,13 +12,13 @@ public sealed class SyntaxReceiver : ISyntaxReceiver
     {
         if (TryGetWorkItem(syntaxNode, out var workItem))
         {
-            if (WorkItems.ContainsKey(workItem.ClassName))
+            if (WorkItems.ContainsKey(workItem.TypeName))
             {
-                WorkItems[workItem.ClassName].Add(workItem);
+                WorkItems[workItem.TypeName].Add(workItem);
             }
             else
             {
-                WorkItems.Add(workItem.ClassName, new List<WorkItem> { workItem });
+                WorkItems.Add(workItem.TypeName, new List<WorkItem> { workItem });
             }
         }
     }
@@ -50,9 +51,15 @@ public sealed class SyntaxReceiver : ISyntaxReceiver
 
             if (item.ExistProperty())
             {
-                var className = item.FieldDeclarationSyntax.SyntaxTree.GetRoot().DescendantNodes()
-                    .OfType<ClassDeclarationSyntax>().Last().Identifier.Text;
-                item.SetClassName(className);
+                var typeDeclarationSyntax = (TypeDeclarationSyntax)item.FieldDeclarationSyntax.Parent;
+                var typeName = new StringBuilder("partial ")
+                    .Append(typeDeclarationSyntax.Keyword.ValueText)
+                    .Append(" ")
+                    .Append(typeDeclarationSyntax.Identifier.ToString())
+                    .Append(typeDeclarationSyntax.TypeParameterList)
+                    .Append(" ")
+                    .Append(typeDeclarationSyntax.ConstraintClauses.ToString());
+                item.SetTypeName(typeName.ToString());
                 workItem = item;
                 return true;
             }

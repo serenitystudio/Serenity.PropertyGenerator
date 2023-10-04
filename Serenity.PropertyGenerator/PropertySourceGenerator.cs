@@ -1,5 +1,7 @@
-﻿using System.Text;
+﻿using System.Diagnostics;
+using System.Text;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
 
 namespace Serenity.PropertyGenerator;
@@ -72,14 +74,41 @@ namespace {NameSpace}
 
             var sourceText = WriteProperty(codeWriter, semanticModel,
                 symbol.ContainingNamespace.IsGlobalNamespace ? string.Empty : symbol.ContainingNamespace.ToString(),
-                symbol.Name, workItems);
+                WriteTypeName(semanticModel, (TypeDeclarationSyntax)workItem.FieldDeclarationSyntax.Parent), workItems);
             context.AddSource($"{symbol.Name}.g.cs", SourceText.From(sourceText, Encoding.UTF8));
             codeWriter.Clear();
         }
     }
 
+    private static string WriteTypeName(in SemanticModel? semanticModel, TypeDeclarationSyntax typeDeclarationSyntax)
+    {
+        var typeName = new StringBuilder("partial ")
+            .Append(typeDeclarationSyntax.Keyword.ValueText)
+            .Append(" ")
+            .Append(typeDeclarationSyntax.Identifier.ToString())
+            .Append(typeDeclarationSyntax.TypeParameterList);
+        foreach (var constraint in typeDeclarationSyntax.ConstraintClauses)
+        {
+            typeName.Append(" where ");
+            foreach (var childNode in constraint.ChildNodes())
+            {
+                switch (childNode)
+                {
+                    case IdentifierNameSyntax:
+                        typeName.Append(childNode).Append(" : ");
+                        break;
+                    case TypeConstraintSyntax typeConstraintSyntax:
+                        typeName.Append(semanticModel.GetTypeInfo(typeConstraintSyntax.Type).Type.ToDisplayString());
+                        break;
+                }
+            }
+        }
+
+        return typeName.ToString();
+    }
+
     private static string WriteProperty(in CodeWriter codeWriter, in SemanticModel? semanticModel, string namespaceName,
-        string className, List<WorkItem> workItems)
+        string typeName, List<WorkItem> workItems)
     {
         if (!string.IsNullOrEmpty(namespaceName))
         {
@@ -87,7 +116,7 @@ namespace {NameSpace}
             codeWriter.BeginBlock();
         }
 
-        codeWriter.AppendLine($"public partial class {className}");
+        codeWriter.AppendLine(typeName);
         codeWriter.BeginBlock();
 
         foreach (var workItem in workItems)
