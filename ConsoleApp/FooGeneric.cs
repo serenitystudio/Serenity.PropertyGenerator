@@ -3,9 +3,11 @@ using Serenity.Property;
 
 namespace ConsoleApp;
 
-public partial class FooGeneric<T> where T : Enum
+public partial class FooGeneric<T, U> where T : Enum where U : Foo
 {
     [Getter] private T _enumGetter;
+
+    [Getter] private U _fooGetter;
 
     [Getter] private int _getterIntField;
 

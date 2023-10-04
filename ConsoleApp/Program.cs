@@ -3,6 +3,6 @@
 using ConsoleApp;
 
 var foo = new Foo();
-var fooGeneric = new FooGeneric<TypeCode>();
+var fooGeneric = new FooGeneric<TypeCode, Foo>();
 var fooStruct = new FooStruct();
 var fooRecord = new FooRecord();
