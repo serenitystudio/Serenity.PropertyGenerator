@@ -5,15 +5,15 @@ namespace ConsoleApp;
 
 public partial record FooRecord()
 {
-     [Getter] private int _getterIntField;
+    [Getter] private int _getterIntField;
 
-     [Setter] private int[] _setterIntField;
+    [Setter] private int[] _setterIntField;
 
-     [Getter, Setter] private int _getterSetterIntField;
+    [Getter, Setter] private int _getterSetterIntField;
 
-     [Getter] private FooFieldType[] _getterTestField;
+    [Getter] private FooFieldType[] _getterTestField;
 
-     [Setter] private FooFieldType _setterFooField;
+    [Setter] private FooFieldType _setterFooField;
 
-     [Getter, Setter] private FooFieldType _getterSetterFooField;
+    [Getter, Setter] private FooFieldType _getterSetterFooField;
 }
